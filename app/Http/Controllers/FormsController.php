@@ -30,8 +30,29 @@ class FormsController extends Controller
 		
 		App::setLocale($request->input('locale'));
 		
+		
+		$my_mail = 'geral@magicube.pt';
+		$subject = "Uma nova mensagem: Plantas/Encomendas"; 
 
-		Mail::send('mail.index', 
+
+		$message = view('mail.index', [
+			'message_type' => 'Plantas/Encomendas',
+			'name' => $name,
+			'email' => $email,
+			'tel' => $tel,
+			'mensagem' => $mensagem,
+			'typ' => $typ,
+		]);
+	
+	
+		$headers  = "Content-type: text/html; charset=utf-8 \r\n";
+		$headers .= "From: MAGICUBE.PT<". $my_mail .">\r\n";
+	
+
+		mail($my_mail, $subject, $message, $headers);
+		
+
+		/*Mail::send('mail.index', 
 				   [
 			'message_type' => 'Plantas/Encomendas',
 			'name' => $name,
@@ -48,7 +69,7 @@ class FormsController extends Controller
 			
 			$message->subject("Uma nova mensagem: Plantas/Encomendas");
 
-        });
+        });*/
 		
 		return response()->json(['message' => trans('messages.form-success')]);
 		
@@ -73,8 +94,27 @@ class FormsController extends Controller
 		
 		App::setLocale($request->input('locale'));
 		
+		$my_mail = 'geral@magicube.pt';
+		$subject = "Uma nova mensagem: Orçamento"; 
 
-		Mail::send('mail.index', 
+
+		$message = view('mail.index', [
+			'message_type' => 'Plantas/Encomendas',
+			'name' => $name,
+			'email' => $email,
+			'tel' => $tel,
+			'mensagem' => $mensagem,
+		]);
+	
+	
+		$headers  = "Content-type: text/html; charset=utf-8 \r\n";
+		$headers .= "From: MAGICUBE.PT<". $my_mail .">\r\n";
+	
+
+		mail($my_mail, $subject, $message, $headers);
+		
+
+		/*Mail::send('mail.index', 
 				   [
 			'message_type' => 'Orçamento',
 			'name' => $name,
@@ -90,7 +130,7 @@ class FormsController extends Controller
 			
 			$message->subject("Uma nova mensagem: Orçamento");
 
-        });
+        });*/
 		
 		return response()->json(['message' => trans('messages.form-success')]);
 		
